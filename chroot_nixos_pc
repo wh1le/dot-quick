@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ -z "$1" ]; then
+  echo "Provide username"
+  exit 1
+fi
+
+mkdir -p /mnt/{boot,dev,proc,sys}
+
+if mountpoint -q /mnt; then
+  echo "/mnt is mounted consider mounting manually"
+  exit 1
+fi
+
+sudo mount /dev/nvme0n1p7 /mnt
+sudo mount /dev/nvme0n1p8 /mnt/boot
+
+sudo mount --bind /dev  /mnt/dev
+sudo mount --bind /proc /mnt/proc
+sudo mount --bind /sys  /mnt/sys
+
+nixos-enter --root /mnt
+sudo - "$1"
