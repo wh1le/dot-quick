@@ -14,3 +14,10 @@ sudo mount --bind /dev  /mnt/dev
 sudo mount --bind /proc /mnt/proc
 sudo mount --bind /sys  /mnt/sys
 ```
+
+Chroot nixos:
+
+```bash
+nixos-enter --root /mnt
+sudo - username
+```
