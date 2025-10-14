@@ -21,3 +21,9 @@ Chroot nixos:
 nixos-enter --root /mnt
 sudo - username
 ```
+
+Rebuild boot drive:
+
+```bash
+nixos-rebuild boot --flake /etc/nixos#default --install-bootloader -L
+```
