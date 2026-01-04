@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ -z "$1" ]; then
+  echo "Provide luks paritition from lsblk -f"
+  exit 1
+fi
+
+sudo cryptsetup open "$1" cryptroot
+
+sudo mount /dev/pool/root /mnt
+sudo nixos-enter --root /mnt
