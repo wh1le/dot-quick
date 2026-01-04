@@ -3,3 +3,12 @@
 if [[ "$XDG_SESSION_TYPE" == "x11" ]]; then
   setxkbmap -option ctrl:swapcaps
 fi
+
+# Swap Ctrl and Caps Lock on GNOME/Wayland if gsettings is available
+if command -v gsettings >/dev/null 2>&1; then
+    echo "Swapping Ctrl and Caps Lock..."
+    gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:swapcaps']"
+    echo "Done."
+else
+    echo "gsettings not found. Skipping Ctrl/Caps Lock swap."
+fi
